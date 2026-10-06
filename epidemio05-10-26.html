@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Epidemiologia Aplicada & Prática Visual</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { background-color: #f4f6f9; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .card-question { border: none; border-radius: 12px; transition: transform 0.2s, box-shadow 0.2s; }
+    .card-question:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.08); }
+    .badge-number { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.1rem; }
+    .analogy-box { background-color: #eef7ff; border-left: 5px solid #0d6efd; border-radius: 4px; }
+    .tech-box { background-color: #f8f9fa; border-left: 5px solid #198754; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="bg-primary text-white py-4 shadow-sm mb-4">
+    <div class="container text-center">
+      <h1 class="fw-bold mb-1"><i class="fa-solid fa-stethoscope me-2"></i>Guia Interativo de Epidemiologia</h1>
+      <p class="lead mb-0">Resolução Didática de Questões Reflexivas e Conceitos Básicos</p>
+    </div>
+  </header>
+
+  <div class="container pb-5">
+    
+    <!-- Questão 1 -->
+    <div class="card card-question shadow-sm mb-4">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center mb-3">
+          <span class="badge-number bg-warning text-dark me-3">1</span>
+          <h5 class="card-title mb-0 fw-bold">Ocultação da Alocação em Ensaio Clínico Randomizado (ECR)[cite: 8]</h5>
+        </div>
+        <p class="text-secondary fw-semibold">
+          "Você vai implementar a randomização de um ECR multicêntrico no sistema de coleta de dados. Que requisitos garantem a ocultação da alocação? Por que alocar pelo número do prontuário ou pelo dia da semana não serve?"[cite: 8]
+        </p>
+
+        <div class="analogy-box p-3 mb-3">
+          <h6 class="fw-bold text-primary mb-1"><i class="fa-solid fa-lightbulb me-2"></i>Conceito Simples (Analogia do Cartão Raspadinha)</h6>
+          <p class="mb-0 small text-dark">
+            Ocultação da alocação é como entregar um envelope lacrado ou uma "raspadinha". Quem aplica o remédio <strong>não pode saber previamente</strong> qual tratamento o próximo paciente vai receber. Se o médico souber, ele pode (mesmo sem querer) direcionar os pacientes mais graves para o remédio que ele "acha" melhor, estragando o sorteio justo.
+          </p>
+        </div>
+
+        <div class="tech-box p-3">
+          <h6 class="fw-bold text-success mb-2"><i class="fa-solid fa-graduation-cap me-2"></i>Resposta Técnica & Prática</h6>
+          <ul class="mb-2 small text-dark">
+            <li><strong>Requisitos de Ocultação em Sistema Eletrônico:</strong> A alocação só é revelada após o paciente ser formalmente incluído no sistema; o algoritmo de sorteio deve ser gerado por servidor central e inacessível à equipe do estudo; logs de auditoria não editáveis.</li>
+            <li><strong>Por que Prontuário ou Dia da Semana FALHAM?</strong> São métodos <i>determinísticos</i> (não aleatórios) e imprevisíveis. O médico sabe antes se a consulta da quarta-feira receberá a droga A ou B, permitindo viés de seleção (ex: agendar pacientes mais graves no dia do remédio promissor).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Questão 2 -->
+    <div class="card card-question shadow-sm mb-4">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center mb-3">
+          <span class="badge-number bg-warning text-dark me-3">2</span>
+          <h5 class="card-title mb-0 fw-bold">Avaliação do Alerta de Sepse Antes/Depois[cite: 8]</h5>
+        </div>
+        <p class="text-secondary fw-semibold">
+          "Um hospital quer avaliar um alerta de sepse no prontuário eletrônico comparando a mortalidade antes e depois da implantação. Isso responde à pergunta? Que desenho você proporia — e qual seria a unidade de randomização?"[cite: 8]
+        </p>
+
+        <div class="analogy-box p-3 mb-3">
+          <h6 class="fw-bold text-primary mb-1"><i class="fa-solid fa-lightbulb me-2"></i>Conceito Simples (Analogia do Semáforo na Cidade)</h6>
+          <p class="mb-0 small text-dark">
+            Comparar "Antes e Depois" é perigoso porque outras coisas mudam no tempo (ex: a equipe melhorou o treinamento, mudaram protocolos de antibiótico). É como instalar um semáforo novo e atribuir a ele a queda de acidentes, ignorando que no mesmo mês a prefeitura também recapeou e iluminou a rua.
+          </p>
+        </div>
+
+        <div class="tech-box p-3">
+          <h6 class="fw-bold text-success mb-2"><i class="fa-solid fa-graduation-cap me-2"></i>Resposta Técnica & Prática</h6>
+          <ul class="mb-2 small text-dark">
+            <li><strong>Responde à pergunta?</strong> Não de forma confiável. Estudos "Antes e Depois" sofrem forte viés temporal (tendência histórica, mudanças sazonais ou operacionais concomitantemente).</li>
+            <li><strong>Desenho Proposto:</strong> Ensaio Clínico Randomizado por Aglomerados (<i>Cluster Randomized Trial</i>) ou em Cunha Escalonada (<i>Stepped-Wedge Design</i>).</li>
+            <li><strong>Unidade de Randomização:</strong> A unidade deve ser o <strong>setor/UTI/enfermaria</strong> (ou hospital/unidade), e <i>não</i> o paciente individual, para evitar contaminação da intervenção entre médicos da mesma equipe.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Questão 3 -->
+    <div class="card card-question shadow-sm mb-4">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center mb-3">
+          <span class="badge-number bg-warning text-dark me-3">3</span>
+          <h5 class="card-title mb-0 fw-bold">Visibilidade de Dados e Vieses no Painel de Monitoramento[cite: 8]</h5>
+        </div>
+        <p class="text-secondary fw-semibold">
+          "No painel de monitoramento do estudo, os desfechos por braço estão visíveis para toda a equipe. Que vieses isso pode introduzir e como você configuraria o acesso?"[cite: 8]
+        </p>
+
+        <div class="analogy-box p-3 mb-3">
+          <h6 class="fw-bold text-primary mb-1"><i class="fa-solid fa-lightbulb me-2"></i>Conceito Simples (Analogia do Juiz de Futebol)</h6>
+          <p class="mb-0 small text-dark">
+            Se o juiz souber o placar parcial e quem está ganhando enquanto apita o jogo, ele pode influenciar marcar um pênalti duvidoso inconscientemente. O mesmo ocorre no estudo: a equipe que sabe qual grupo está indo "melhor" tratará os pacientes de forma diferente.
+          </p>
+        </div>
+
+        <div class="tech-box p-3">
+          <h6 class="fw-bold text-success mb-2"><i class="fa-solid fa-graduation-cap me-2"></i>Resposta Técnica & Prática</h6>
+          <ul class="mb-2 small text-dark">
+            <li><strong>Vieses Introduzidos:</strong>
+              <ul>
+                <li><i>Viés de Aferição/Avaliador:</i> Quem mede o resultado pode ser tendencioso ao procurar complicações.</li>
+                <li><i>Viés de Performance:</i> Mudar o cuidado clínico prestado entre os dois grupos.</li>
+                <li><i>Interrupção Precoce Indevida:</i> Flutuações estatísticas temporárias podem levar a conclusões precipitadas.</li>
+              </ul>
+            </li>
+            <li><strong>Configuração de Acesso:</strong>
+              <ul>
+                <li><strong>Cegamento de Dados:</strong> O painel operacional exibe dados consolidados e <i>cegos</i> (ex: Grupo A e Grupo B, sem rótulo do tratamento real).</li>
+                <li><strong>Acesso Restrito:</strong> Somente um Comitê Independente de Monitoramento de Dados (DSMB/CIMD) tem acesso aos dados descegados para análise periódica de segurança.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Questão 4 -->
+    <div class="card card-question shadow-sm mb-4">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center mb-3">
+          <span class="badge-number bg-warning text-dark me-3">4</span>
+          <h5 class="card-title mb-0 fw-bold">Métricas de Benefício: RRR vs RAR vs NNT</h5>
+        </div>
+        <p class="text-secondary fw-semibold">
+          "Você precisa mostrar o resultado da trombólise a gestores num painel. Apresentaria a RRR (24%), a RAR (2,9 p.p.) ou o NNT (34)? Qual escolha poderia superestimar o benefício?"[cite: 9]
+        </p>
+
+        <div class="analogy-box p-3 mb-3">
+          <h6 class="fw-bold text-primary mb-1"><i class="fa-solid fa-lightbulb me-2"></i>Conceito Simples (Analogia do Desconto na Loja)</h6>
+          <p class="mb-0 small text-dark">
+            Dizer que um produto teve <strong>"50% de desconto"</strong> parece incrível (RRR). Mas se o preço caiu de R$ 2,00 para R$ 1,00, a economia real foi de apenas <strong>R$ 1,00</strong> (RAR). Mostrar apenas a porcentagem relativa exagera o benefício real do remédio.
+          </p>
+        </div>
+
+        <div class="tech-box p-3">
+          <h6 class="fw-bold text-success mb-2"><i class="fa-solid fa-graduation-cap me-2"></i>Resposta Técnica & Prática</h6>
+          <div class="row align-items-center">
+            <div class="col-md-8">
+              <ul class="mb-2 small text-dark">
+                <li><strong>Qual escolha superestima?</strong> A <strong>RRR (Risco Relativo Relativo - 24%)</strong> isolada tende a inflar a percepção do efeito, pois ignora o risco de base da população.</li>
+                <li><strong>Recomendação de Apresentação:</strong> Apresentar a <strong>RAR (Redução Absoluta do Risco - 2,9%)</strong> e o <strong>NNT (Número Necessário Tratar - 34)</strong> juntos. O NNT é muito intuitivo: indica que precisamos tratar 34 pacientes para salvar/beneficiar exatamente 1.</li>
+              </ul>
+            </div>
+            <div class="col-md-4 text-center">
+              <button class="btn btn-outline-primary btn-sm mt-2" onclick="simularMétricas()">
+                <i class="fa-solid fa-calculator me-1"></i> Abrir Calculadora / Exemplo
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Questão 5 -->
+    <div class="card card-question shadow-sm mb-4">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-center mb-3">
+          <span class="badge-number bg-warning text-dark me-3">5</span>
+          <h5 class="card-title mb-0 fw-bold">Incorporação Tecnológica no SUS (Eficácia vs Efefetividade)[cite: 9]</h5>
+        </div>
+        <p class="text-secondary fw-semibold">
+          "Um aplicativo de telemonitoramento reduziu internações num ensaio clínico. O que você precisaria saber antes de recomendar sua incorporação em larga escala no SUS?"[cite: 9]
+        </p>
+
+        <div class="analogy-box p-3 mb-3">
+          <h6 class="fw-bold text-primary mb-1"><i class="fa-solid fa-lightbulb me-2"></i>Conceito Simples (Analogia da Receita de Laboratório vs Cozinha de Casa)</h6>
+          <p class="mb-0 small text-dark">
+            Um bolo feito por um chef de cozinha renomado com ingredientes caros e medidos no miligrama sempre dá certo (<strong>Eficácia</strong>). Mas o bolo vai funcionar na casa das pessoas, com forno descalibrado, falta de sinal de internet ou pessoas sem familiaridade com celular? (<strong>Efetividade e Acessibilidade</strong>).
+          </p>
+        </div>
+
+        <div class="tech-box p-3">
+          <h6 class="fw-bold text-success mb-2"><i class="fa-solid fa-graduation-cap me-2"></i>Resposta Técnica & Prática</h6>
+          <p class="small text-dark mb-2">Para incorporação via CONITEC no SUS, é necessário avaliar os pilares:</p>
+          <div class="row g-2 small text-dark">
+            <div class="col-md-6">
+              <div class="p-2 border rounded bg-white">
+                <strong>1. Efefetividade Real:</strong> Funciona na vida real com pacientes idosos, analfabetos digitais e áreas sem conectividade?
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-2 border rounded bg-white">
+                <strong>2. Avaliação Econômica:</strong> Análise de Custo-Efetividade e Custo-Utilidade frente às tecnologias existentes.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-2 border rounded bg-white">
+                <strong>3. Impacto Orçamentário:</strong> Qual o custo financeiro total anual para o orçamento do SUS?
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="p-2 border rounded bg-white">
+                <strong>4. Infraestrutura & Equidade:</strong> Capacidade operacional de suporte, LGPD/segurança de dados e garantia de acesso sem gerar exclusão social.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SweetAlert2 & JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    function simularMétricas() {
+      Swal.fire({
+        title: 'Entendendo Métricas na Prática',
+        html: `
+          <div class="text-start small">
+            <p><strong>Exemplo Prático (1.000 pacientes):</strong></p>
+            <ul>
+              <li><strong>Grupo Sem Remédio:</strong> 12,1% tiveram complicações (121 doentes).</li>
+              <li><strong>Grupo Com Remédio:</strong> 9,2% tiveram complicações (92 doentes).</li>
+            </ul>
+            <hr>
+            <p><strong>1. RAR (Redução Absoluta do Risco):</strong> 12,1% - 9,2% = <strong>2,9%</strong> (Evitou 29 casos em cada 1.000 pessoas).</p>
+            <p><strong>2. RRR (Redução Relativa do Risco):</strong> 2,9% / 12,1% = <strong>24%</strong> (Faz o remédio parecer muito mais potente!).</p>
+            <p><strong>3. NNT (Número Necessário para Tratar):</strong> 1 / 0,029 = <strong>~34</strong> (Precisamos tratar 34 pessoas para salvar 1).</p>
+          </div>
+        `,
+        icon: 'info',
+        confirmButtonText: 'Entendido!',
+        confirmButtonColor: '#0d6efd'
+      });
+    }
+  </script>
+</body>
+</html>
